@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="menu" id="main-menu">
+      <p id="Logo">Inventory Management</p>
+      <img class="user-icon"></img>
+      <p class="user-name">{{name}}</p>
+      <br><br>
+      <!-- Menu icon -->
+      <div class="icon-close" id="close-menu">
+        <img src="{{url_for('static', filename='img/close.png')}}">
+      </div>
+
+      <!-- Menu -->
+      <ul>
+        <li><p>Inventories</p></li>
+        <li><p>Users</p></li>
+        <li><p>My Items</p></li>
+        <li><p id="messages-icon">My Messages</p></li>
+        <li><p>Logout</p></li>
+      </ul>
+    </div>
+	
+	<div class="menu" id="messages-menu">
+	    <div class="icon-close" id="close-messages-menu">
+			<img src="{{url_for('static', filename='img/close.png')}}">
+        </div>
+		<ul>       
+	        <li><p>Borrow request</p></li>        
+	        <li><p>Transfer request</p></li>	        
+	        <li><p>Return request</p></li>
+	        <li><p>My borrows</p></li>
+	        <li><p>My transfers</p></li>
+	        <li><p>My returns</p></li>        
+      	</ul>
+	</div>
+
+    <!-- Main body -->
+    <div class="jumbotron">
+
+      <div class="icon-menu">
+        <i class="fa fa-bars"></i>
+        Main Menu
+      </div>
+    
+		<div class="flip-container" id="Inventories">
+			<p> Inventories </p>
+			<div class="operation-panel-top">
+				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation" id="operation-borrow"/>
+				<img src="{{url_for('static', filename='img/close.png')}}" class="operation" id="operation-delete"/>
+			</div>
+			<div class="searchbox">
+				<input type="text" id="search-inventory"></input>
+			</div>
+			<div class="operation-btns">
+				<img class="new-btn" src="{{url_for('static', filename='img/new.png')}}"></img>
+				<img class="export-btn" src="{{url_for('static', filename='img/export.png')}}"></img>
+			</div>
+			<div id="dialog-form">
+				<label for="excel-file">Import from excel file</label>
+				<input type="file" name="choose-excel-file" id="excel-file">
+				<img id="import" src="{{url_for('static', filename='img/new.png')}}">
+  				<p class="validateTips">所有的表单字段都是必填的。</p>
+ 
+				  <form>
+					  <fieldset>
+					  	<label for="tag">Tag</label>
+					  	<input type="text" name="tag" id="tag" class="text ui-widget-content ui-corner-all">
+					    <label for="name">Name</label>
+					    <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+					    <label for="PN">PN</label>
+					  	<input type="text" name="PN" id="PN" class="text ui-widget-content ui-corner-all">
+					  	<label for="SN">SN</label>
+					  	<input type="text" name="SN" id="SN" class="text ui-widget-content ui-corner-all">
+					  	<label for="shipping">Shipping/Source</label>
+					  	<input type="text" name="shipping" id="shipping" class="text ui-widget-content ui-corner-all">
+					  	<label for="capital">Capital/Expense</label>
+					  	<input type="text" name="capital" id="capital" class="text ui-widget-content ui-corner-all">
+					  	<label for="disposition">Disposition</label>
+					  	<input type="text" name="disposition" id="disposition" class="text ui-widget-content ui-corner-all">
+					  	<label for="status">Status</label>
+					  	<input type="text" name="status" id="status" class="text ui-widget-content ui-corner-all">
+					  	<label for="owner">Owner</label>
+					  	<input type="text" name="owner" id="owner" class="text ui-widget-content ui-corner-all">
+					   </fieldset>
+				  </form>
+			</div>
+			<div class="flipper">
+				<div class="front">
+					<!-- 前面内容 -->
+					<table class="inventory-table">
+					    <thead>
+					        <tr>
+					        	<th><input type="checkbox" id="check-head"/></th>
+					        	<th>id</th>
+					        	<th>Tag</th>
+					        	<th>Name</th>
+					        	<th>PN</th>
+					        	<th>SN</th>
+					        	<th>Shipping/Source</th>
+					        	<th>Capital/Expense</th>
+					        	<th>Disposition</th>
+					        	<th>Status</th>
+					        	<th>Owner</th>
+					        	<th>User</th>
+					        </tr>
+					    </thead>
+					    {% for inv in invs%}
+					  		<tr>
+					  			<td><input type="checkbox" class="check-item"/></td>
+					  			<td class="inventory-id">{{inv.id}}</td>
+					    		<td align="center"> {{inv.tag}}</td>
+					    		<td align="center"> {{inv.name}} </td>
+					    		<td>{{inv.PN}}</td>
+					    		<td>{{inv.SN}}</td>
+					    		<td>{{inv.shipping}}</td>
+					    		<td>{{inv.capital}}</td>
+					    		<td>{{inv.disposition}}</td>
+					    		<td>{{inv.status}}</td>
+					    		<td>{{inv.owner}}</td>
+					    		<td></td>
+					   		</tr>
+					  	{% endfor %}
+					</table>
+					
+				</div>
+				<div class="back">
+					<!-- 背面内容 -->
+					<p> I'm back! </p>
+				</div>
+			</div>
+			<div class="operation-panel-bottom">
+				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation" id="operation-borrow"/>
+				<img src="{{url_for('static', filename='img/close.png')}}" class="operation"/>
+			</div>
+		</div>
+		
+		<div class="flip-container" id="Users">
+			<p> Users </p>
+			<div class="flipper">
+				<div class="front">
+					<table class="user-table">
+					    <thead>
+					        <tr><th><input type="checkbox" id="check-head-user"/></th><th>Username</th><th>Email</th></tr>
+					    </thead>
+					    {% for inv in invs%}
+					  		<tr>
+					  			<td><input type="checkbox" class="check-item-user"/></td>
+					  			
+					    		<td align="center"> {{inv.username}}</td>
+					    		<td align="center"> {{inv.email}} </td>
+					   		</tr>
+					  	{% endfor %}
+					</table>
+				</div>
+				<div class="back">
+					<!-- 背面内容 -->
+					<p> Things will work out in a manner</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="flip-container" id="MyItems">
+			<p> My Items </p>
+			<div class="flipper">
+				<div class="front">
+					<!-- 前面内容 -->
+					<p> Have courage and be kind </p>
+				</div>
+				<div class="back">
+					<!-- 背面内容 -->
+					<p> Come and have a try! </p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="flip-container" id="MyMessages">
+			<p> My Messages </p>
+			<div class="flipper">
+				<div class="front">
+					<!-- 前面内容 -->
+					<p> Yes, you made it </p>
+				</div>
+				<div class="back">
+					<!-- 背面内容 -->
+					<p> Have fun!~~~ </p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="btn">
+			<img class="flip-btn" src="{{url_for('static', filename='img/flip.png')}}"/>
+			<img class="switch-btn" src="{{url_for('static', filename='img/switch.png')}}"/>
+		</div>
+		
+	</div>
+{% endblock %}

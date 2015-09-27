@@ -1,0 +1,4 @@
+]q((cIM.model.models
+RequestMessage
+qoq}q(UusernameqUwendy3UownerqUadminU	operationqUborrowUdateqU2015-09-24 17:09:13.542000Uinv_idq	U1ub(hoq
+}q(hUwendy2hUadminhUborrowhU2015-09-24 17:09:13.542000h	U3ub(hoq}q(hUwendy4hUadminhUborrowhU2015-09-24 17:09:55.357000h	U1ub(hoq}q(hUwendy6hUadminhUborrowhU2015-09-24 17:10:04.813000h	U1ube.

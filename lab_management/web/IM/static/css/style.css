@@ -1,0 +1,244 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Initial body */
+body {
+  left: 0;
+  margin: 0;
+  overflow: auto;
+  position: relative;
+}
+
+/* Initial menu */
+.menu {
+  background: #202024 url("../img/black-thread.png") repeat left top;
+  left: -285px;  /* start off behind the scenes */
+  height: 100%;
+  position: fixed;
+  width: 285px;
+}
+
+#Logo {
+	color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+}
+
+/* Basic styling */
+
+.jumbotron {
+  background-color: #E1ECED;
+  height: 100%;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+.menu ul {
+  border-top: 1px solid #636366;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  border-bottom: 1px solid #636366;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 45px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+
+.menu p {
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.icon-close {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.icon-menu {
+  color: #1F1F1F;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-top: 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.btn {
+	position: relative;
+	margin: auto;
+	padding-left: 550px;
+	padding-top: 100px;
+}
+
+.flip-btn {
+	cursor: pointer;
+	display: inline;
+}
+
+.switch-btn {
+	cursor: pointer;
+	padding-left: 240px;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000;
+	padding-left: 100px;
+	padding-top: 1px;
+}
+	/* flip the pane when hovered */
+	.flip-container.flip .flipper {
+	transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 900px;
+	height: 360px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 1s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	border-radius: 5px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	background-color: #88C6E5;
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+	background-color: #7890C0;
+}
+
+.user-icon, .user-name {
+	display: inline;
+}
+
+.searchbox {
+	display: inline;
+	margin-left: 30%;
+	padding: auto;
+}
+
+.operation-panel-top {
+	display: inline;
+	float: left;
+}
+
+.operation-panel-bottom {
+	position: fixed;
+	margin-top: 350px;	
+}
+
+.operation {
+	visibility:hidden;
+	cursor: pointer;
+}
+
+.operation-btns {
+	padding-left: 600px;
+}
+
+.inventory-table {
+	padding: 20px;
+}
+
+.new-btn {
+	cursor: pointer;
+}
+
+#login-form {
+	background-color: #E1ECED;
+	border: 1px dashed #E1ECED;
+	border-radius: 5px;
+	position: absolute;
+	margin-left: 40em;
+	margin-top: 4em;
+	width: 300px;
+	height: 200px;
+	padding-left: 50px;
+	padding-top: 10px;
+}
+
+#div-login-name {
+	margin-top: 1.5em;
+}
+
+#login-name, #login-password {
+	margin: 1em;
+}
+
+#login-name {
+	margin-left: 2.2em;
+}
+
+#label-name, #label-password {
+	font-family: cursive;
+	font-weight: bold;
+	padding-left: 1em;
+	display: inline;
+}
+
+#login-btn {
+	font-family: cursive;
+	font-weight: bold;
+	margin-left: 15em;
+	margin-top: 2em;
+}
+
+h2 {
+	font-size: 4em;
+	font-family: Open Sans, Sans-serif;
+	padding-left: 5em;
+	padding-top: 2em;
+}
+
+strong {
+	color: red;
+}
+
+#import {
+	cursor: pointer;
+}
+
+label {
+	font-family: cursive;
+	font-weight: bold;
+	padding-left: 1em;
+	display: inline;
+	float: left;
+}
+
+.text{
+	margin: 2px;
+	display: block;
+}
