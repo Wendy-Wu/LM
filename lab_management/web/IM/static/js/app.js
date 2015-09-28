@@ -238,11 +238,27 @@ var main = function() {
 	 $('#dialog-form').dialog("open"); 
   });
  
-  $('#import').click(function(){
-	  file = $('#excel-file')[0].files[0];
-	  alert(file.name+file.size);
-	  
+//  $('#import').click(function(){
+//	  file = $('#excel-file')[0].files[0];
+//	  fake_path = $('#excel-file')[0].value;
+//	  alert(file.name+file.size+fake_path);
+//	  $.ajax({
+//			 url: "http://127.0.0.1:5000/import-excel",
+//			 type: "POST",
+//			 data: {file: fake_path
+//			 },
+//			 async: true,
+//	  });
+//  });
+  
+  $('#export-excel').click(function(){
+	  $.ajax({
+			 url: "http://127.0.0.1:5000/export-excel",
+			 type: "GET",
+			 async: false,
+		  });
   });
+  
 };
 
 

@@ -6,6 +6,11 @@ Created on Aug 31, 2015
 from view import *
 from dao.daos import *
 from flask import request, jsonify, redirect, url_for
+from service.import_excel import Parser
+from service.export_excel import Writer
+from IM import app
+
+import os
 
 @app.route('/hello/<name>')
 def hello_name(name = None):
@@ -70,4 +75,39 @@ def login():
 @app.route('/hello')
 def welcome():
     return render_template('login.html')
+
+@app.route('/import-excel', methods=['POST'])
+def import_excel():
+    '''needs to check file type == xlsx etc. 
+       if file exists, then server will overrides it by default. 
+    '''
+    file = request.files['choose-excel-file']
+    print file.filename
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    print file_path
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+    Parser.parse_by_row(file_path)
+    # the imported inventories will be added to the database and appended on the page.
+    return redirect('/show')  
     
+@app.route('/export-excel', methods=['GET'])
+def export_excel():
+    invs = InvDao.get_all_invs()
+    data = []
+    inv_args = []
+    for inv in invs:
+        inv_args.append(inv.tag)
+        inv_args.append(inv.name)
+        inv_args.append(inv.PN)
+        inv_args.append(inv.SN)
+        inv_args.append(inv.shipping)
+        inv_args.append(inv.capital)
+        inv_args.append(inv.disposition)
+        inv_args.append(inv.status)
+        inv_args.append(inv.owner)
+        data.append(inv_args)
+        inv_args=[]
+    print data
+    file_path = os.path.join(app.config['EXPORT_FOLDER'], 'export.xls')
+    print file_path
+    Writer.export_excel(data, file_path)

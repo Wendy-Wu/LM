@@ -54,12 +54,19 @@
 			</div>
 			<div class="operation-btns">
 				<img class="new-btn" src="{{url_for('static', filename='img/new.png')}}"></img>
-				<img class="export-btn" src="{{url_for('static', filename='img/export.png')}}"></img>
+				
+				<a href="/static/export_file/export.xls" download="export" id="export-excel">
+					<img class="export-btn" src="{{url_for('static', filename='img/export.png')}}"></img>
+				</a>
+					
 			</div>
 			<div id="dialog-form">
-				<label for="excel-file">Import from excel file</label>
-				<input type="file" name="choose-excel-file" id="excel-file">
-				<img id="import" src="{{url_for('static', filename='img/new.png')}}">
+				<form action="/import-excel" method=post enctype=multipart/form-data>
+			      	 <label for="excel-file">Import from excel file</label>
+					 <input type="file" name="choose-excel-file" id="excel-file">
+			         <input type=submit value=Upload>
+			    </form>
+				
   				<p class="validateTips">所有的表单字段都是必填的。</p>
  
 				  <form>

@@ -42,7 +42,7 @@ class Inventory(db.Model):
     user = db.relationship('User')
     
     
-    def __init__(self, tag, name, pn, sn, ship, cap, dis, sta, owner=None):
+    def __init__(self, tag, name, pn, sn, ship, cap, dis, sta, owner=''):
         self.tag = tag
         self.name = name
         self.PN = pn

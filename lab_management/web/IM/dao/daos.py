@@ -49,9 +49,14 @@ class InvDao():
     
     @staticmethod
     def add_inventory(tag, name, PN, SN, shipping, capital, disposition, status):
+        '''need try catch exception or just check if unique'''
         inv = Inventory(tag, name, PN, SN, shipping, capital, disposition, status)
-        db.session.add(inv)
-        db.session.commit()
-        return Inventory.query.filter_by(SN=SN).first()
+        try:
+            db.session.add(inv)
+            db.session.commit()
+            return True
+        except:
+            return False
+        
         
     
