@@ -125,6 +125,7 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	overflow-y: scroll;
 }
 
 /* front pane, placed above back */
