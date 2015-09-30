@@ -120,12 +120,15 @@ var main = function() {
 		 });
 	 }
 		 $.ajax({
-			url: "http://127.0.0.1:5000/delete",
+			url: "http://127.0.0.1:5000/delete-inventory",
 			type: "POST",
 			data: {rows:checked_items},
 
 			async: true,
-		 }).done(function(data){alert(data.result);});
+		 }).done(function(data){
+			 alert(data.result);
+			 location.reload();
+		 });
 		
   });
   
@@ -167,8 +170,15 @@ var main = function() {
   
   var tag = $("#tag"),
   name = $("#name"),
-  allFields = $([]).add(tag).add(name);
- 
+  PN = $("#PN"),
+  SN = $("#SN"),
+  ship = $("#shipping"),
+  cap = $("#capital"),
+  dis = $("#disposition"),
+  status = $("#status"),
+  owner = $("#owner"),
+  error = $("#dialog-form .error-msg")
+  allFields = $([]).add(tag).add(name).add(PN).add(SN).add(ship).add(cap).add(dis).add(status).add(owner);
   
   $('#dialog-form').dialog({
 	  autoOpen: false,
@@ -181,11 +191,12 @@ var main = function() {
         duration: 1000
       },
       hide: {
-        effect: "explode",
-        duration: 1000
+        effect: "blind",
+        duration: 500
       },
       buttons: {
     	  "Add an inventory": function() {
+    		  error.hide();
               var bValid = true;
 //              allFields.removeClass( "ui-state-error" );
 //     
@@ -202,27 +213,39 @@ var main = function() {
 	     			 url: "http://127.0.0.1:5000/add-inventory",
 	     			 type: "POST",
 	     			 data: {tag: tag.val(),
-	     				 	name: name.val()
+	     				 	name: name.val(),
+	     				 	PN: PN.val(),
+	     				 	SN: SN.val(),
+	     				 	ship: ship.val(),
+	     				 	cap: cap.val(),
+	     				 	dis: dis.val(),
+	     				 	status: status.val(),
+	     				 	owner: owner.val(),
 	     			 },
 	     			 async: true,
 	     		  }).done(function(data){
 	     			  var inv = data.result
-	     			 $( ".inventory-table" ).append( "<tr>" +
-	     	                  "<td><input type='checkbox' class='check-item'/></td>" +
-	     	                  "<td class='inventory-id'>" + inv[0] + "</td>" +
-	     	                  "<td align='center'>" + inv[1] + "</td>" +
-	     	                  "<td align='center'>" + inv[2] + "</td>" +
-//	     	                  "<td>" + PN.val() + "</td>" +
-//	     	                  "<td>" + SN.val() + "</td>" +
-//	     	                  "<td>" + shipping.val() + "</td>" +
-//	     	                  "<td>" + capital.val() + "</td>" +
-//	     	                  "<td>" + disposition.val() + "</td>" +
-//	     	                  "<td>" + status.val() + "</td>" +
-//	     	                  "<td>" + owner.val() + "</td>" +
-	     	                "</tr>" );
+	     			  if (inv) {
+	     				 $( ".inventory-table" ).append( "<tr>" +
+		     	                  "<td><input type='checkbox' class='check-item'/></td>" +
+		     	                  "<td style='display:none;' class='inventory-id'>" + inv[0] + "</td>" +
+		     	                  "<td align='center'>" + inv[1] + "</td>" +
+		     	                  "<td align='center'>" + inv[2] + "</td>" +
+		     	                  "<td align='center'>" + inv[3] + "</td>" +
+		     	                  "<td align='center'>" + inv[4] + "</td>" +
+		     	                  "<td align='center'>" + inv[5] + "</td>" +
+		     	                  "<td align='center'>" + inv[6] + "</td>" +
+		     	                  "<td align='center'>" + inv[7] + "</td>" +
+		     	                  "<td align='center'>" + inv[8] + "</td>" +
+		     	                  "<td align='center'>" + inv[9] + "</td>" +
+		     	              	  "</tr>" );
+	     				 $( '#dialog-form' ).dialog( "close" );
+	     			  }
+	     			  else {
+	     				  error.show();
+	     			  }
 	     		  });
                 
-                $( this ).dialog( "close" );
               }
             },
             Cancel: function() {
@@ -237,20 +260,9 @@ var main = function() {
   
   $('.new-btn').click(function(){
 	 $('#dialog-form').dialog("open"); 
+	 error.hide();
   });
- 
-//  $('#import').click(function(){
-//	  file = $('#excel-file')[0].files[0];
-//	  fake_path = $('#excel-file')[0].value;
-//	  alert(file.name+file.size+fake_path);
-//	  $.ajax({
-//			 url: "http://127.0.0.1:5000/import-excel",
-//			 type: "POST",
-//			 data: {file: fake_path
-//			 },
-//			 async: true,
-//	  });
-//  });
+
   
   $('#export-excel').click(function(){
 	  $.ajax({

@@ -192,7 +192,6 @@ body {
 	display: inline-block;
 	float: left;
 	margin-left: 8em;
-	margin-top: 0.5em;
 	margin-bottom: 0.6em;
 	padding-left: 3em;
 }
@@ -205,7 +204,7 @@ body {
 }
 
 .operation-panel-top img, .operation-panel-bottom img{
-	margin-left: 0.5em;
+	margin-left: 1em;
 }
 
 .operation {

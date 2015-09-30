@@ -20,11 +20,12 @@ def hello_name(name = None):
 def show():
     return render_template('index.html', name = session.get('username'), invs = InvDao.get_all_invs())
 
-@app.route('/delete', methods=['POST'])
-def delete_user():
-    json_checked = request.form.getlist('rows[]')
-    print json_checked
-    return jsonify(result=json_checked)
+@app.route('/delete-inventory', methods=['POST'])
+def delete_inventory():
+    delete_ids = request.form.getlist('rows[]')
+    print delete_ids
+    b = InvDao.delete_inventory(delete_ids)
+    return jsonify(result=b)
 
 @app.route('/search-user', methods=['POST'])    
 def search_user():
@@ -45,11 +46,18 @@ def search_user():
 def add_inventory():
     tag = request.form.get('tag')
     name = request.form.get('name')
-    inv = InvDao.add_inventory(tag, name)
-    print inv
-    inv_info = [inv.id, inv.tag, inv.name]
-    print inv_info
-    return jsonify(result=inv_info)
+    PN = request.form.get('PN')
+    SN = request.form.get('SN')
+    ship = request.form.get('ship')
+    cap = request.form.get('cap')
+    dis = request.form.get('dis')
+    status = request.form.get('status')
+    owner = request.form.get('owner')
+    inv = InvDao.add_inventory(tag, name, PN, SN, ship, cap, dis, status, owner)
+    if inv:
+        inv_info = [inv.id, inv.tag, inv.name, inv.PN, inv.SN, inv.shipping, inv.capital, inv.disposition, inv.status, inv.owner]
+        return jsonify(result=inv_info)
+    else: return jsonify(result=None)
 
 @app.route('/borrow', methods=['POST'])
 def borrow():

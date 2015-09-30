@@ -48,15 +48,32 @@ class InvDao():
         return Inventory.query.all()
     
     @staticmethod
-    def add_inventory(tag, name, PN, SN, shipping, capital, disposition, status):
+    def add_inventory(tag, name, PN, SN, shipping, capital, disposition, status, owner=''):
         '''need try catch exception or just check if unique'''
-        inv = Inventory(tag, name, PN, SN, shipping, capital, disposition, status)
+        inv = Inventory(tag, name, PN, SN, shipping, capital, disposition, status, owner)
         try:
             db.session.add(inv)
             db.session.commit()
+            return inv
+        except:
+            return None
+        
+    @staticmethod
+    def delete_inventory(ids):
+        invs=[]
+        for an_id in ids:
+            invs.append(InvDao.search_inventory_by_id(an_id))
+        print invs
+        try:
+            for inv in invs:
+                db.session.delete(inv)
+                db.session.commit()
             return True
         except:
             return False
         
+    @staticmethod
+    def search_inventory_by_id(search_id):
+        return Inventory.query.filter_by(id = search_id).first()
         
     

@@ -72,6 +72,7 @@
 			    </form>
 				
   				<p>Or add by filling in the blank</p>
+  				<p class="error-msg"><strong>Error:</strong> please check the information.</p>
  
 				  <form>
 					  <fieldset>
@@ -103,7 +104,7 @@
 					    <thead>
 					        <tr>
 					        	<th><input type="checkbox" id="check-head"/></th>
-					        	<th>id</th>
+					        	<th style="display:none;">id</th>
 					        	<th>Tag</th>
 					        	<th>Name</th>
 					        	<th>PN</th>
@@ -119,7 +120,7 @@
 					    {% for inv in invs%}
 					  		<tr>
 					  			<td><input type="checkbox" class="check-item"/></td>
-					  			<td class="inventory-id">{{inv.id}}</td>
+					  			<td style="display:none;" class="inventory-id">{{inv.id}}</td>
 					    		<td align="center"> {{inv.tag}}</td>
 					    		<td align="center"> {{inv.name}} </td>
 					    		<td align="center">{{inv.PN}}</td>
