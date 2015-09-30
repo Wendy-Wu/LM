@@ -4,6 +4,7 @@ Created on Aug 31, 2015
 @author: wuw7
 '''
 from IM import db
+import flask.ext.whooshalchemy
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -29,6 +30,7 @@ class User(db.Model):
             return True
         
 class Inventory(db.Model):
+    __searchable__ = ['tag', 'name']
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     tag = db.Column(db.String(64), index=True)
     name = db.Column(db.String(64), index=True)

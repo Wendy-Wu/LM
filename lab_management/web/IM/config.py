@@ -13,3 +13,4 @@ UPLOAD_FOLDER = os.path.join(CONFIG_DIR, 'data', 'imported_files')
 EXPORT_FOLDER = os.path.join(CONFIG_DIR, 'static', 'export_file')
 #print CONFIG_DIR
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(CONFIG_DIR, 'data', 'IM.db')
+WHOOSH_BASE = "C:\\Python27\\Lib\\site-packages"

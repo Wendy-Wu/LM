@@ -5,6 +5,7 @@ Created on Aug 31, 2015
 '''
 from IM import db
 from model.models import User, Inventory, Borrows
+import traceback
 
 # User DAO
 class UserDao():
@@ -75,5 +76,16 @@ class InvDao():
     @staticmethod
     def search_inventory_by_id(search_id):
         return Inventory.query.filter_by(id = search_id).first()
+    
+    @staticmethod
+    def search_inventory(search_string):
+        try:
+            results = Inventory.query.whoosh_search('Eruption')
+        except Exception:
+            traceback.print_exc()
+
+        print results.all()
+        return results.all()
+        
         
     

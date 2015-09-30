@@ -41,6 +41,21 @@ def search_user():
     #for item in checked_list:
      #   results.append(UserDao.search_a_user(item.rowID))
     #return jsonify(results)
+    
+@app.route('/search-inventory', methods=['POST'])    
+def search_inventory():
+    search_string = request.form.get('search_string')
+    print search_string
+    invs = InvDao.search_inventory(search_string)
+    print invs
+    inv_info = []
+    inv_args = []
+    for inv in invs:
+        inv_args = [inv.id, inv.tag, inv.name, inv.PN, inv.SN, inv.shipping, inv.capital, inv.disposition, inv.status, inv.owner]
+        inv_info.append(inv_args)
+        inv_args = []
+    print inv_info
+    return jsonify(result=inv_info)
         
 @app.route('/add-inventory', methods=['POST'])
 def add_inventory():

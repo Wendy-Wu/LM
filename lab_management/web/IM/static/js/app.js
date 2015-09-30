@@ -129,7 +129,10 @@ var main = function() {
 			 alert(data.result);
 			 location.reload();
 		 });
-		
+  });
+  
+  $('#operation-edit').click(function(){
+	  
   });
   
   $('#operation-borrow').click(function(){
@@ -160,7 +163,7 @@ var main = function() {
 	  if (event.which == 13){
 		  search_string = $('#search-inventory').val();
 		  $.ajax({
-			 url: "http://127.0.0.1:5000/search-user",
+			 url: "http://127.0.0.1:5000/search-inventory",
 			 type: "POST",
 			 data: {search_string: search_string},
 			 async: true,
