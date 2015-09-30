@@ -5,6 +5,8 @@ Created on Aug 31, 2015
 '''
 import os
 
+SESSION_TYPE = 'sqlalchemy'
+
 # DB setting.
 CONFIG_DIR = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = os.path.join(CONFIG_DIR, 'data', 'imported_files')

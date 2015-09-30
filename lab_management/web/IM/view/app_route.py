@@ -5,7 +5,7 @@ Created on Aug 31, 2015
 '''
 from view import *
 from dao.daos import *
-from flask import request, jsonify, redirect, url_for
+from flask import request, jsonify, redirect, url_for, session
 from service.import_excel import Parser
 from service.export_excel import Writer
 from IM import app
@@ -18,7 +18,7 @@ def hello_name(name = None):
 
 @app.route('/show')
 def show():
-    return render_template('index.html', invs = InvDao.get_all_invs())
+    return render_template('index.html', name = session.get('username'), invs = InvDao.get_all_invs())
 
 @app.route('/delete', methods=['POST'])
 def delete_user():
@@ -69,6 +69,7 @@ def login():
         password = request.form['login-password']
         if UserDao.login(name, password):
             print 'login with: ' + name
+            session['username'] = name
             return redirect('/show')
     return render_template('login.html', error = 'wrong login name or password')
 

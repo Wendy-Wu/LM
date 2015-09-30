@@ -2,22 +2,23 @@
 {% block content %}
 
 	<div class="menu" id="main-menu">
+		<div class="icon-close" id="close-menu">
+        	<img src="{{url_for('static', filename='img/close.png')}}">
+      	</div>
       <p id="Logo">Inventory Management</p>
-      <img class="user-icon"></img>
-      <p class="user-name">{{name}}</p>
-      <br><br>
-      <!-- Menu icon -->
-      <div class="icon-close" id="close-menu">
-        <img src="{{url_for('static', filename='img/close.png')}}">
+      <div id="user-panel">
+      	<img class="user-icon" src="{{url_for('static', filename='img/user-icon.png')}}"></img>
+      	<p id="user-name">{{name}}</p>
       </div>
-
+      
+      <br><br>
       <!-- Menu -->
-      <ul>
-        <li><p>Inventories</p></li>
-        <li><p>Users</p></li>
-        <li><p>My Items</p></li>
-        <li><p id="messages-icon">My Messages</p></li>
-        <li><p>Logout</p></li>
+      <ul class="list-menu">
+        <li><p align="center">Inventories</p></li>
+        <li><p align="center">Users</p></li>
+        <li><p align="center">My Items</p></li>
+        <li><p align="center" id="messages-icon">My Messages</p></li>
+        <li><p align="center">Logout</p></li>
       </ul>
     </div>
 	
@@ -25,13 +26,13 @@
 	    <div class="icon-close" id="close-messages-menu">
 			<img src="{{url_for('static', filename='img/close.png')}}">
         </div>
-		<ul>       
-	        <li><p>Borrow request</p></li>        
-	        <li><p>Transfer request</p></li>	        
-	        <li><p>Return request</p></li>
-	        <li><p>My borrows</p></li>
-	        <li><p>My transfers</p></li>
-	        <li><p>My returns</p></li>        
+		<ul class="list-menu">       
+	        <li><p align="center">Borrow request</p></li>        
+	        <li><p align="center">Transfer request</p></li>	        
+	        <li><p align="center">Return request</p></li>
+	        <li><p align="center">My borrows</p></li>
+	        <li><p align="center">My transfers</p></li>
+	        <li><p align="center">My returns</p></li>        
       	</ul>
 	</div>
 
@@ -40,34 +41,37 @@
 
       <div class="icon-menu">
         <i class="fa fa-bars"></i>
-        Main Menu
+        <p>Main Menu</p>
       </div>
     
-		<div class="flip-container" id="Inventories">
+		<div class="flip-container" align="center" id="Inventories">
 			<p> Inventories </p>
 			<div class="operation-panel-top">
 				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation" id="operation-borrow"/>
-				<img src="{{url_for('static', filename='img/close.png')}}" class="operation" id="operation-delete"/>
+				<img src="{{url_for('static', filename='img/return.png')}}" class="operation" id="operation-return"/>
+				<img src="{{url_for('static', filename='img/edit.png')}}" class="operation" id="operation-edit"/>
+				<img src="{{url_for('static', filename='img/transfer.png')}}" class="operation" id="operation-transfer"/>
+				<img src="{{url_for('static', filename='img/scrap.png')}}" class="operation" id="operation-scrap"/>				
+				<img src="{{url_for('static', filename='img/delete.png')}}" class="operation" id="operation-delete"/>
 			</div>
 			<div class="searchbox">
+				<img src="{{url_for('static', filename='img/search.png')}}">
 				<input type="text" id="search-inventory"></input>
 			</div>
 			<div class="operation-btns">
 				<img class="new-btn" src="{{url_for('static', filename='img/new.png')}}"></img>
-				
 				<a href="/static/export_file/export.xls" download="export" id="export-excel">
 					<img class="export-btn" src="{{url_for('static', filename='img/export.png')}}"></img>
-				</a>
-					
+				</a>		
 			</div>
 			<div id="dialog-form">
 				<form action="/import-excel" method=post enctype=multipart/form-data>
-			      	 <label for="excel-file">Import from excel file</label>
+			      	 <label for="excel-file">Add from excel file</label>
 					 <input type="file" name="choose-excel-file" id="excel-file">
-			         <input type=submit value=Upload>
+			         <input type=submit value=Import id="submit-excel">
 			    </form>
 				
-  				<p class="validateTips">所有的表单字段都是必填的。</p>
+  				<p>Or add by filling in the blank</p>
  
 				  <form>
 					  <fieldset>
@@ -118,13 +122,13 @@
 					  			<td class="inventory-id">{{inv.id}}</td>
 					    		<td align="center"> {{inv.tag}}</td>
 					    		<td align="center"> {{inv.name}} </td>
-					    		<td>{{inv.PN}}</td>
-					    		<td>{{inv.SN}}</td>
-					    		<td>{{inv.shipping}}</td>
-					    		<td>{{inv.capital}}</td>
-					    		<td>{{inv.disposition}}</td>
-					    		<td>{{inv.status}}</td>
-					    		<td>{{inv.owner}}</td>
+					    		<td align="center">{{inv.PN}}</td>
+					    		<td align="center">{{inv.SN}}</td>
+					    		<td align="center">{{inv.shipping}}</td>
+					    		<td align="center">{{inv.capital}}</td>
+					    		<td align="center">{{inv.disposition}}</td>
+					    		<td align="center">{{inv.status}}</td>
+					    		<td align="center">{{inv.owner}}</td>
 					    		<td></td>
 					   		</tr>
 					  	{% endfor %}
@@ -138,11 +142,15 @@
 			</div>
 			<div class="operation-panel-bottom">
 				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation" id="operation-borrow"/>
-				<img src="{{url_for('static', filename='img/close.png')}}" class="operation"/>
+				<img src="{{url_for('static', filename='img/return.png')}}" class="operation" id="operation-return"/>
+				<img src="{{url_for('static', filename='img/edit.png')}}" class="operation" id="operation-edit"/>
+				<img src="{{url_for('static', filename='img/transfer.png')}}" class="operation" id="operation-transfer"/>
+				<img src="{{url_for('static', filename='img/scrap.png')}}" class="operation" id="operation-scrap"/>				
+				<img src="{{url_for('static', filename='img/delete.png')}}" class="operation" id="operation-delete"/>
 			</div>
 		</div>
 		
-		<div class="flip-container" id="Users">
+		<div class="flip-container" align="center" id="Users">
 			<p> Users </p>
 			<div class="flipper">
 				<div class="front">
@@ -167,7 +175,7 @@
 			</div>
 		</div>
 		
-		<div class="flip-container" id="MyItems">
+		<div class="flip-container" align="center" id="MyItems">
 			<p> My Items </p>
 			<div class="flipper">
 				<div class="front">
@@ -181,7 +189,7 @@
 			</div>
 		</div>
 		
-		<div class="flip-container" id="MyMessages">
+		<div class="flip-container" align="center" id="MyMessages">
 			<p> My Messages </p>
 			<div class="flipper">
 				<div class="front">
@@ -195,9 +203,8 @@
 			</div>
 		</div>
 		
-		<div class="btn">
-			<img class="flip-btn" src="{{url_for('static', filename='img/flip.png')}}"/>
-			<img class="switch-btn" src="{{url_for('static', filename='img/switch.png')}}"/>
+		<div class="switch-btn" align="center">
+			<img src="{{url_for('static', filename='img/switch.png')}}"/>
 		</div>
 		
 	</div>

@@ -172,8 +172,9 @@ var main = function() {
   
   $('#dialog-form').dialog({
 	  autoOpen: false,
-	  height: 300,
-	  width: 400,
+	  resizable: false,
+	  height: 500,
+	  width: 250,
 	  modal: true,
       show: {
         effect: "blind",
