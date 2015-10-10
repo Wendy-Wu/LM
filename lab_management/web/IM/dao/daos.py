@@ -79,13 +79,22 @@ class InvDao():
     
     @staticmethod
     def search_inventory(search_string):
+        results=[]
         try:
-            results = Inventory.query.whoosh_search('Eruption')
+            results.append(Inventory.query.filter_by(tag = search_string).all())
+            results.append(Inventory.query.filter_by(name = search_string).all())
+            results.append(Inventory.query.filter_by(PN = search_string).all())
+            results.append(Inventory.query.filter_by(SN = search_string).all())
+            results.append(Inventory.query.filter_by(shipping = search_string).all())
+            results.append(Inventory.query.filter_by(capital = search_string).all())
+            results.append(Inventory.query.filter_by(disposition = search_string).all())
+            results.append(Inventory.query.filter_by(owner = search_string).all())
+            
         except Exception:
             traceback.print_exc()
+            print 'aaaaaaaa ooooooooo'
 
-        print results.all()
-        return results.all()
+        return results
         
         
     

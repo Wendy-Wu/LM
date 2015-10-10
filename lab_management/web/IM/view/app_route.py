@@ -46,14 +46,16 @@ def search_user():
 def search_inventory():
     search_string = request.form.get('search_string')
     print search_string
-    invs = InvDao.search_inventory(search_string)
-    print invs
+    invs_list = InvDao.search_inventory(search_string)
+    print invs_list
     inv_info = []
     inv_args = []
-    for inv in invs:
-        inv_args = [inv.id, inv.tag, inv.name, inv.PN, inv.SN, inv.shipping, inv.capital, inv.disposition, inv.status, inv.owner]
-        inv_info.append(inv_args)
-        inv_args = []
+    for invs in invs_list:
+        if invs.length != 0:
+            for inv in invs:
+                inv_args = [inv.id, inv.tag, inv.name, inv.PN, inv.SN, inv.shipping, inv.capital, inv.disposition, inv.status, inv.owner]
+                inv_info.append(inv_args)
+                inv_args = []
     print inv_info
     return jsonify(result=inv_info)
         
