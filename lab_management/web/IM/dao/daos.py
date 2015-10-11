@@ -88,8 +88,9 @@ class InvDao():
             results.append(Inventory.query.filter_by(shipping = search_string).all())
             results.append(Inventory.query.filter_by(capital = search_string).all())
             results.append(Inventory.query.filter_by(disposition = search_string).all())
+            results.append(Inventory.query.filter_by(status = search_string).all())
             results.append(Inventory.query.filter_by(owner = search_string).all())
-            
+                        
         except Exception:
             traceback.print_exc()
             print 'aaaaaaaa ooooooooo'

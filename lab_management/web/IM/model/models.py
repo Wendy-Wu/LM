@@ -4,7 +4,6 @@ Created on Aug 31, 2015
 @author: wuw7
 '''
 from IM import db
-import flask.ext.whooshalchemy
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)

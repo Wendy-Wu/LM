@@ -18,7 +18,7 @@
         <li><p align="center">Users</p></li>
         <li><p align="center">My Items</p></li>
         <li><p align="center" id="messages-icon">My Messages</p></li>
-        <li><p align="center">Logout</p></li>
+        <li><p align="center" id="logout">Logout</p></li>
       </ul>
     </div>
 	
@@ -47,12 +47,12 @@
 		<div class="flip-container" align="center" id="Inventories">
 			<p> Inventories </p>
 			<div class="operation-panel-top">
-				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation" id="operation-borrow"/>
-				<img src="{{url_for('static', filename='img/return.png')}}" class="operation" id="operation-return"/>
-				<img src="{{url_for('static', filename='img/edit.png')}}" class="operation" id="operation-edit"/>
-				<img src="{{url_for('static', filename='img/transfer.png')}}" class="operation" id="operation-transfer"/>
-				<img src="{{url_for('static', filename='img/scrap.png')}}" class="operation" id="operation-scrap"/>				
-				<img src="{{url_for('static', filename='img/delete.png')}}" class="operation" id="operation-delete"/>
+				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation operation-borrow"/>
+				<img src="{{url_for('static', filename='img/return.png')}}" class="operation operation-return"/>
+				<img src="{{url_for('static', filename='img/edit.png')}}" class="operation operation-edit"/>
+				<img src="{{url_for('static', filename='img/transfer.png')}}" class="operation operation-transfer"/>
+				<img src="{{url_for('static', filename='img/scrap.png')}}" class="operation operation-scrap"/>				
+				<img src="{{url_for('static', filename='img/delete.png')}}" class="operation operation-delete"/>
 			</div>
 			<div class="searchbox">
 				<img src="{{url_for('static', filename='img/search.png')}}">
@@ -138,16 +138,19 @@
 				</div>
 				<div class="back">
 					<!-- 背面内容 -->
-					<p> I'm back! </p>
+					<!-- 前面内容 -->
+					<table class="inventory-search-table">
+					    
+					</table>
 				</div>
 			</div>
 			<div class="operation-panel-bottom">
-				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation" id="operation-borrow"/>
-				<img src="{{url_for('static', filename='img/return.png')}}" class="operation" id="operation-return"/>
-				<img src="{{url_for('static', filename='img/edit.png')}}" class="operation" id="operation-edit"/>
-				<img src="{{url_for('static', filename='img/transfer.png')}}" class="operation" id="operation-transfer"/>
-				<img src="{{url_for('static', filename='img/scrap.png')}}" class="operation" id="operation-scrap"/>				
-				<img src="{{url_for('static', filename='img/delete.png')}}" class="operation" id="operation-delete"/>
+				<img src="{{url_for('static', filename='img/borrow.png')}}" class="operation operation-borrow"/>
+				<img src="{{url_for('static', filename='img/return.png')}}" class="operation operation-return"/>
+				<img src="{{url_for('static', filename='img/edit.png')}}" class="operation operation-edit"/>
+				<img src="{{url_for('static', filename='img/transfer.png')}}" class="operation operation-transfer"/>
+				<img src="{{url_for('static', filename='img/scrap.png')}}" class="operation operation-scrap"/>				
+				<img src="{{url_for('static', filename='img/delete.png')}}" class="operation operation-delete"/>
 			</div>
 		</div>
 		

@@ -8,9 +8,11 @@ from dao.daos import *
 from flask import request, jsonify, redirect, url_for, session
 from service.import_excel import Parser
 from service.export_excel import Writer
+from service.pickle_message import Picker
 from IM import app
 
 import os
+import datetime
 
 @app.route('/hello/<name>')
 def hello_name(name = None):
@@ -51,7 +53,7 @@ def search_inventory():
     inv_info = []
     inv_args = []
     for invs in invs_list:
-        if invs.length != 0:
+        if invs != []:
             for inv in invs:
                 inv_args = [inv.id, inv.tag, inv.name, inv.PN, inv.SN, inv.shipping, inv.capital, inv.disposition, inv.status, inv.owner]
                 inv_info.append(inv_args)
@@ -79,11 +81,14 @@ def add_inventory():
 @app.route('/borrow', methods=['POST'])
 def borrow():
     items = request.form.getlist('rows[]')
-    username = request.form.get('username')
-    for item in items:
-        # add to a message
-        pass
-    #pickle messages
+    print items
+    username = session['username']
+    print username
+    for i in range(len(items)):
+        if i%2 == 0:
+            Picker.add_request_msg(username, items[i], 'borrow', items[i+1], str(datetime.datetime.now()))
+
+    print Picker.get_msg_list()   
     #notify
     return jsonify(result=True)
         

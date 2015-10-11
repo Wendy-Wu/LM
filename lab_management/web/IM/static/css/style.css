@@ -217,6 +217,11 @@ body {
 	padding-top: 0.5em;
 }
 
+.inventory-search-table {
+	padding-left: 1em;
+	padding-top: 0.5em;
+}
+
 .new-btn {
 	cursor: pointer;
 }

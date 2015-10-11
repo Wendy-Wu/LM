@@ -108,7 +108,7 @@ var main = function() {
   });
   
   /*apply operation on checked items*/
-  $('#operation-delete').click(function(){
+  $('.operation-delete').click(function(){
 	 checked_items = new Array();
 	 if($('.check-item:checked').length){
 		 $('.check-item:checked').each(function(){
@@ -126,24 +126,23 @@ var main = function() {
 
 			async: true,
 		 }).done(function(data){
-			 alert(data.result);
 			 location.reload();
 		 });
   });
   
-  $('#operation-edit').click(function(){
+  $('.operation-edit').click(function(){
 	  
   });
   
-  $('#operation-borrow').click(function(){
+  $('.operation-borrow').click(function(){
 	 checked_items = new Array();
 	 if($('.check-item:checked').length){
 		 $('.check-item:checked').each(function(){
-			  var currentRow = this.parentNode.parentNode;
-			  var column = currentRow.getElementsByTagName("td")[1];
-			  var rowID = column.textContent;
-			  
-			  checked_items.push(rowID);
+			  var currentRow = this.parentNode.parentNode;  
+			  var inv_id = currentRow.getElementsByTagName("td")[1].textContent;
+			  var owner = currentRow.getElementsByTagName("td")[10].textContent;  
+			  checked_items.push(inv_id);
+			  checked_items.push(owner);
 		 });
 	 }
 	 
@@ -155,20 +154,94 @@ var main = function() {
 		data: {rows:checked_items, username: username},
 
 		async: true,
-	 }).done(function(data){alert(data.result);});
+	 }).done(function(data){
+		 if (data.result == true){
+			 alert('Borrow request successfully sent.');
+		 }
+		 $('.check-item').prop('checked', false);
+		 $('.operation').css('visibility', 'hidden');
+	 });
   });
   
   
   $('#search-inventory').keydown(function(event){
 	  if (event.which == 13){
+		  $('.inventory-search-table').empty();
 		  search_string = $('#search-inventory').val();
-		  $.ajax({
-			 url: "http://127.0.0.1:5000/search-inventory",
-			 type: "POST",
-			 data: {search_string: search_string},
-			 async: true,
-		  }).done(function(data){alert(data.result);});
+		  if (search_string != ''){	
+			  //flip the card and show search results
+			  $('.flip-container').toggleClass('flip'); 
+			  $.ajax({
+				 url: "http://127.0.0.1:5000/search-inventory",
+				 type: "POST",
+				 data: {search_string: search_string},
+				 async: false,
+			  }).done(function(data){
+				  var invs = data.result
+				  $( ".inventory-search-table" ).append("<thead>\
+					        <tr>\
+					        	<th><input type='checkbox' id='check-search-head'/></th>\
+					        	<th style='display:none;'>id</th>\
+					        	<th>Tag</th>\
+					        	<th>Name</th>\
+					        	<th>PN</th>\
+					        	<th>SN</th>\
+					        	<th>Shipping/Source</th>\
+					        	<th>Capital/Expense</th>\
+					        	<th>Disposition</th>\
+					        	<th>Status</th>\
+					        	<th>Owner</th>\
+					        	<th>User</th>\
+					        </tr>\
+					    </thead>");
+				  for (var i=0; i<invs.length; i++){
+					  $( ".inventory-search-table" ).append( "<tr>" +
+	     	                  "<td><input type='checkbox' class='check-item'/></td>" +
+	     	                  "<td style='display:none;' class='inventory-id'>" + invs[i][0] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][1] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][2] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][3] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][4] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][5] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][6] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][7] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][8] + "</td>" +
+	     	                  "<td align='center'>" + invs[i][9] + "</td>" +
+	     	              	  "</tr>" );
+				  }
+			  }); 
+		  }else{
+			  $('.inventory-search-table').empty();
+			  $('.flip-container').toggleClass('flip'); 
+		  }
+		  $('.check-item').click(function(){
+			  /*check-head change according to check-item*/
+			  if ($('.check-item:checked').length == $('.check-item').length) {
+			        $('#check-search-head').prop('checked', true);
+			  }
+			  else {
+			        $('#check-search-head').prop('checked', false);
+			  }
+			  /*operation show and hide according to checked item*/
+			  if ($('.check-item:checked').length) {
+				  $('.operation').css('visibility', 'visible');
+				  
+			  }else{
+			      $('.operation').css('visibility', 'hidden');
+			  }
+		  });
+		  
+		  /* check-head: select/unselect all*/
+		  $('#check-search-head').change(function(){
+				 $('.check-item').prop('checked', $(this).prop('checked'));
+				 if (this.checked == true){
+		 			 $('.operation').css('visibility', 'visible')
+		 		  }else{
+		 			 $('.operation').css('visibility', 'hidden');
+		 		  }
+		  });
 	  }
+	  
   });
   
   var tag = $("#tag"),
@@ -243,6 +316,22 @@ var main = function() {
 		     	                  "<td align='center'>" + inv[9] + "</td>" +
 		     	              	  "</tr>" );
 	     				 $( '#dialog-form' ).dialog( "close" );
+	     				$('.check-item').click(function(){
+	     					  /*check-head change according to check-item*/
+	     					  if ($('.check-item:checked').length == $('.check-item').length) {
+	     					        $('#check-head').prop('checked', true);
+	     					  }
+	     					  else {
+	     					        $('#check-head').prop('checked', false);
+	     					  }
+	     					  /*operation show and hide according to checked item*/
+	     					  if ($('.check-item:checked').length) {
+	     						  $('.operation').css('visibility', 'visible');
+	     						  
+	     					  }else{
+	     					      $('.operation').css('visibility', 'hidden');
+	     					  }
+	     				  });
 	     			  }
 	     			  else {
 	     				  error.show();
@@ -274,6 +363,10 @@ var main = function() {
 			 async: false,
 		  });
   });
+  
+  $('#logout').click(function(){
+	  window.location.href="http://127.0.0.1:5000/hello";
+  })
   
 };
 
