@@ -1,6 +1,6 @@
 '''
 Created on Aug 31, 2015
-
+Create and config Flask, create session, DB instance
 @author: wuw7
 '''
 import os, sys

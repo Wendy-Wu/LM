@@ -1,6 +1,6 @@
 '''
 Created on Aug 31, 2015
-
+Create the initial data
 @author: wuw7
 '''
 
@@ -24,6 +24,7 @@ db.session.commit()
 db.session.add(user1)
 db.session.add(user2)
 db.session.commit()
+
 invs = Inventory.query.all()
 print invs[2].id
 

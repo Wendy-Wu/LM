@@ -1,6 +1,6 @@
 '''
 Created on Sep 27, 2015
-
+Use xlrd to read excel(only one sheet) one by one, add the data into database
 @author: wuw7
 '''
 import xlrd

@@ -1,6 +1,6 @@
 '''
 Created on Sep 28, 2015
-
+Use xlwt to write an excel one by one.
 @author: wuw7
 '''
 import xlwt

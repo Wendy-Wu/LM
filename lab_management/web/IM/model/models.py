@@ -1,6 +1,6 @@
 '''
 Created on Aug 31, 2015
-
+Set model for database 
 @author: wuw7
 '''
 from IM import db

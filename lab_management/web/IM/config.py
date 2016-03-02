@@ -1,6 +1,6 @@
 '''
 Created on Aug 31, 2015
-
+Config database, environment variables, search path
 @author: wuw7
 '''
 import os

@@ -1,6 +1,6 @@
 '''
 Created on Aug 31, 2015
-
+Data Access Object
 @author: wuw7
 '''
 from IM import db

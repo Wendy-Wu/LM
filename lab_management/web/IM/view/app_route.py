@@ -1,6 +1,6 @@
 '''
 Created on Aug 31, 2015
-
+Page controller: route table between url and page files
 @author: wuw7
 '''
 from view import *
