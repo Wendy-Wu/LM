@@ -1,6 +1,6 @@
 <html>
 	<head id="header" role="banner">
-	  	
+	  	<meta name="viewport" content="width=device-width, initial-scale=1">
 	    {% if title %}
 	    <title>{{ title }} - Inventory Management</title>
 	    {% else %}
@@ -8,12 +8,14 @@
 	    {% endif %}
     	<link href="{{url_for('static', filename='css/style.css')}}" rel='stylesheet'>
     	<link href="{{url_for('static', filename='css/login.css')}}" rel='stylesheet'>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
     	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		<script src="{{url_for('static', filename='js/jquery.js')}}"></script>
     	<script src="{{url_for('static', filename='js/app.js')}}"></script>
 		<script src="{{url_for('static', filename='js/jquery-ui.min.js')}}"></script>
 		<script src="{{url_for('static', filename='css/jquery-ui.min.css')}}"></script>
+		<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 		<script type="text/javascript">
   			var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 		</script>

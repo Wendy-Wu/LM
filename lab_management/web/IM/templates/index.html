@@ -10,7 +10,7 @@
       	<img class="user-icon" src="{{url_for('static', filename='img/user-icon.png')}}"></img>
       	<p id="user-name">{{name}}</p>
       </div>
-      
+	  
       <br><br>
       <!-- Menu -->
       <ul class="list-menu">
@@ -61,7 +61,7 @@
 			<div class="operation-btns">
 				<img class="new-btn" src="{{url_for('static', filename='img/new.png')}}"></img>
 				<a href="/static/export_file/export.xls" download="export" id="export-excel">
-					<img class="export-btn" src="{{url_for('static', filename='img/export.png')}}"></img>
+          			<span class="glyphicon glyphicon-export"></span>
 				</a>		
 			</div>
 			<div id="dialog-form">
@@ -100,7 +100,7 @@
 			<div class="flipper">
 				<div class="front">
 					<!-- 前面内容 -->
-					<table class="inventory-table">
+					<table class="inventory-table table table-bordered">
 					    <thead>
 					        <tr>
 					        	<th><input type="checkbox" id="check-head"/></th>
@@ -158,7 +158,7 @@
 			<p> Users </p>
 			<div class="flipper">
 				<div class="front">
-					<table class="user-table">
+					<table class="table table-bordered">
 					    <thead>
 					        <tr><th><input type="checkbox" id="check-head-user"/></th><th>Username</th><th>Email</th></tr>
 					    </thead>
