@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<body>
+<div class="container">
+{% if msg %}
+<div class="alert alert-success">{{ msg }}</div>
+{% endif %}
+<form  method="post" class="form-horizontal">
+<div class="control-group">
+<label class="control-label" for="email">email</label>
+<div class="controls">
+<input type="text" name="email" id="email">
+</div>
+</div>
+<div class="control-group">
+<div class="controls">
+<button type="submit" class="btn">send mail</button>
+</div>
+</div>
+</form>
+
+</div>
+</body>
+{% endblock %}
